@@ -1,2 +1,2 @@
 # BBAcademy
-#### Repo for Bitbag to track my progress
+#### Repo for BitBag to track my progress
