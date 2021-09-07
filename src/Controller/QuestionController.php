@@ -14,7 +14,7 @@ class QuestionController extends AbstractController
 
     public function homepage(): Response
     {
-        return new Response('coś noweago');
+        return $this->render('question/homepage.html.twig');
     }
     #[Route('/questions/{slug}', name: 'question')]
 
