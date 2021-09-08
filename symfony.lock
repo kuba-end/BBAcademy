@@ -14,6 +14,12 @@
     "doctrine/lexer": {
         "version": "1.2.1"
     },
+    "knplabs/knp-markdown-bundle": {
+        "version": "1.9.0"
+    },
+    "michelf/php-markdown": {
+        "version": "1.9.0"
+    },
     "monolog/monolog": {
         "version": "2.3.2"
     },
@@ -239,6 +245,28 @@
             "config/packages/dev/web_profiler.yaml",
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.9",
+            "ref": "404714014dd6ff7de9aa0f9582d592147359e617"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js",
+            "assets/styles/app.css",
+            "config/packages/assets.yaml",
+            "config/packages/prod/webpack_encore.yaml",
+            "config/packages/test/webpack_encore.yaml",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "symfony/yaml": {

@@ -1,32 +1,38 @@
 <?php
-declare(strict_types=1);
 
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class QuestionController extends AbstractController
 {
-
-    #[Route('/', name: 'homepage')]
-
-    public function homepage(): Response
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function homepage()
     {
+
         return $this->render('question/homepage.html.twig');
     }
-    #[Route('/questions/{slug}', name: 'question')]
 
+    /**
+     * @Route("/questions/{slug}", name="question_show")
+     */
     public function show($slug)
     {
         $answers = [
-            'Make sure smth',
-            'Nope it is not possible',
-            'I dont know but i wanted add reply',
+            'Make sure your cat is sitting purrrfectly still 🤣',
+            'Honestly, I like furry shoes better than MY cat',
+            'Maybe... try saying the spell backwards?',
         ];
-        return $this->render('question/show.html.twig',[
-            'question' => ucwords(str_replace("-"," ",$slug)),
+        $questionText = 'I\'ve been turned into a cat, any thoughts on how to turn back? While I\'m **adorable**, I don\'t really care for cat food.';
+
+        return $this->render('question/show.html.twig', [
+            'question' => ucwords(str_replace('-', ' ', $slug)),
+            'questionText' => $questionText,
             'answers' => $answers,
         ]);
     }

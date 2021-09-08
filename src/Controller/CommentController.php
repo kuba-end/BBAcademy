@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -10,26 +9,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommentController extends AbstractController
 {
-    #[Route('comments/{id}/vote/{direction<up|down>}', name:'comment_vote', methods: 'POST')]
-
-    public function commentVote(int $id,
-                                string $direction,
-                                LoggerInterface $logger)
+    #[Route('/comments/{id}/vote/{direction<up|down>}', methods: 'POST')]
+    public function commentVote($id, $direction, LoggerInterface $logger)
     {
-        // todo use id to query database
+        // todo - use id to query the database
 
-        // use real logic to save this to db
-        if('up' === $direction)
-        {
+        // use real logic here to save this to the database
+        if ('up' === $direction) {
             $logger->info('Voting up!');
-            $currentVoteCount = rand(7,100);
-        }else
-        {
+            $currentVoteCount = rand(7, 100);
+        } else {
             $logger->info('Voting down!');
-
-            $currentVoteCount = rand(0,5);
+            $currentVoteCount = rand(0, 5);
         }
-
 
         return $this->json(['votes' => $currentVoteCount]);
     }
