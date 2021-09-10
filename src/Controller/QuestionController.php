@@ -9,18 +9,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class QuestionController extends AbstractController
 {
-    /**
-     * @Route("/", name="homepage")
-     */
+
+    #[Route('/', name: 'homepage')]
     public function homepage()
     {
 
         return $this->render('question/homepage.html.twig');
     }
 
-    /**
-     * @Route("/questions/{slug}", name="question_show")
-     */
+    #[Route('/question/{slug}', name: 'question_show')]
     public function show($slug, MarkdownHelper $markdownHelper)
     {
         $answers = [
@@ -29,7 +26,9 @@ class QuestionController extends AbstractController
             'Maybe... try saying the spell backwards?',
         ];
 
-        $questionText = 'I\'ve been turned into a cat, any *thoughts* on how to turn back? While I\'m **adorable**, I don\'t really care for cat food.';
+        $questionText = 'I\'ve been turned into a cat, any *thoughts* on how to turn back?
+                        While I\'m **adorable**, I don\'t really care for cat food.';
+
         $parsedQuestionText = $markdownHelper->parse($questionText);
 
 
