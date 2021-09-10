@@ -17,7 +17,7 @@ class QuestionController extends AbstractController
         return $this->render('question/homepage.html.twig');
     }
 
-    #[Route('/question/{slug}', name: 'question_show')]
+    #[Route('/questions/{slug}', name: 'question_show')]
     public function show($slug, MarkdownHelper $markdownHelper)
     {
         $answers = [
@@ -25,7 +25,7 @@ class QuestionController extends AbstractController
             'Honestly, I like furry shoes better than MY cat',
             'Maybe... try saying the spell backwards?',
         ];
-
+        throw new \Exception('bad stuff happens');
         $questionText = 'I\'ve been turned into a cat, any *thoughts* on how to turn back?
                         While I\'m **adorable**, I don\'t really care for cat food.';
 
