@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\MarkdownHelper;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,6 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuestionController extends AbstractController
 {
 
+    private bool $isDebug;
+    private LoggerInterface $mdLogger;
+
+    public function __construct(bool $isDebug, LoggerInterface $mdLogger)
+    {
+
+        $this->isDebug = $isDebug;
+        $this->mdLogger = $mdLogger;
+    }
     #[Route('/', name: 'homepage')]
     public function homepage()
     {
@@ -18,14 +28,18 @@ class QuestionController extends AbstractController
     }
 
     #[Route('/questions/{slug}', name: 'question_show')]
-    public function show($slug, MarkdownHelper $markdownHelper)
+    public function show($slug, MarkdownHelper $markdownHelper,)
     {
+        if($this->isDebug)
+        {
+            $this->mdLogger->info('We are in debug mode!');
+        }
         $answers = [
             'Make sure your cat is sitting `purrrfectly` still 🤣',
             'Honestly, I like furry shoes better than MY cat',
             'Maybe... try saying the spell backwards?',
         ];
-        throw new \Exception('bad stuff happens');
+
         $questionText = 'I\'ve been turned into a cat, any *thoughts* on how to turn back?
                         While I\'m **adorable**, I don\'t really care for cat food.';
 
