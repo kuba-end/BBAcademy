@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 namespace App\Service;
 
@@ -12,32 +11,28 @@ class MarkdownHelper
     private $markdownParser;
     private $cache;
     private $isDebug;
-    private LoggerInterface $logger;
+    private $logger;
 
-    public function __construct(MarkdownParserInterface $markdownParser,
-                                CacheInterface $cache,
-                                LoggerInterface $mdLogger,
-                                bool $isDebug)
+    public function __construct(MarkdownParserInterface $markdownParser, CacheInterface $cache, bool $isDebug, LoggerInterface $mdLogger)
     {
         $this->markdownParser = $markdownParser;
         $this->cache = $cache;
         $this->isDebug = $isDebug;
         $this->logger = $mdLogger;
     }
+
     public function parse(string $source): string
     {
-        if(stripos($source,'cat'))
-        {
+        if (stripos($source, 'cat') !== false) {
             $this->logger->info('Meow!');
         }
-        if ($this->isDebug)
-        {
+
+        if ($this->isDebug) {
             return $this->markdownParser->transformMarkdown($source);
         }
-        return $this->cache->get('markdown_'.md5($source),function () use ($source)
-        {
+
+        return $this->cache->get('markdown_'.md5($source), function() use ($source) {
             return $this->markdownParser->transformMarkdown($source);
-        }
-        );
+        });
     }
 }
